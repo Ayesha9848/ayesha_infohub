@@ -1,0 +1,9 @@
+export default async function handler(req, res) {
+  const quotes = [
+    "Believe in yourself.",
+    "Dream big. Start small. Act now.",
+    "Little by little, a little becomes a lot."
+  ];
+  const random = quotes[Math.floor(Math.random() * quotes.length)];
+  res.status(200).json({ quote: random });
+}
