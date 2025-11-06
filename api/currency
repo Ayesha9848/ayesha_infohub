@@ -1,0 +1,10 @@
+export default async function handler(req, res) {
+  try {
+    const amount = parseFloat(req.query.amount || "0");
+    const usd = (amount * 0.012).toFixed(2);
+    const eur = (amount * 0.011).toFixed(2);
+    res.status(200).json({ usd, eur });
+  } catch {
+    res.status(500).json({ error: "Conversion failed" });
+  }
+}
