@@ -1,0 +1,18 @@
+import axios from "axios";
+
+export default async function handler(req, res) {
+  try {
+    const city = req.query.city || "Hyderabad";
+    const apiKey = process.env.WEATHER_API_KEY;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    const { data } = await axios.get(url);
+    res.status(200).json({
+      city: data.name,
+      temperature: data.main.temp,
+      condition: data.weather[0].description,
+      wind_speed: data.wind.speed,
+    });
+  } catch {
+    res.status(500).json({ error: "Weather API failed" });
+  }
+}
